@@ -34,6 +34,7 @@ backend/uploads/
 backend/outputs/
 *.mp3
 *.txt
+!backend/requirements.txt
 *.srt
 
 # IDE
