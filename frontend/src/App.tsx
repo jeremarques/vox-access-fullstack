@@ -211,40 +211,31 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
-      </div>
-
-      <div className="relative container mx-auto px-4 py-8 max-w-7xl">
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-12 max-w-5xl">
         {/* Header */}
-        <header className="text-center mb-12 relative z-10">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl mb-6 shadow-lg transform hover:scale-105 transition-transform">
-            <Sparkles className="w-10 h-10 text-white" />
+        <header className="text-center mb-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-lg mb-6">
+            <Sparkles className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-6xl font-extrabold bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">
             VoxAccess
           </h1>
-          <p className="text-2xl text-slate-700 mb-3 font-medium">
+          <p className="text-lg text-gray-600 mb-2">
             Acessibilidade e IA para Todos
           </p>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-base text-gray-500 max-w-2xl mx-auto">
             Transforme imagens, PDFs e documentos em conteúdo acessível com inteligência artificial
           </p>
         </header>
 
         {/* Main Content Card */}
-        <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 md:p-10 mb-8 border border-white/20 relative z-10">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
           {/* Upload Section */}
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-primary-100 rounded-lg">
-                <Upload className="w-5 h-5 text-primary-600" />
-              </div>
-              <h2 className="text-3xl font-bold text-slate-800">
+              <Upload className="w-5 h-5 text-gray-600" />
+              <h2 className="text-xl font-semibold text-gray-900">
                 Enviar Arquivo
               </h2>
             </div>
@@ -255,10 +246,10 @@ function App() {
               onDragLeave={handleDragLeave}
               onDragOver={handleDragOver}
               onDrop={handleDrop}
-              className={`relative border-2 border-dashed rounded-2xl p-12 text-center transition-all duration-300 ${
+              className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
                 isDragging
-                  ? 'border-primary-500 bg-primary-50 scale-105 shadow-lg'
-                  : 'border-slate-300 hover:border-primary-400 hover:bg-slate-50'
+                  ? 'border-primary-500 bg-primary-50'
+                  : 'border-gray-300 hover:border-gray-400 bg-gray-50'
               }`}
             >
               <input
@@ -273,15 +264,15 @@ function App() {
                 htmlFor="file-input"
                 className="cursor-pointer flex flex-col items-center"
               >
-                <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 transition-all ${
-                  isDragging ? 'bg-primary-500 scale-110' : 'bg-gradient-to-br from-primary-400 to-primary-600'
-                } shadow-lg`}>
-                  <Upload className={`w-10 h-10 text-white transition-transform ${isDragging ? 'animate-bounce' : ''}`} />
+                <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${
+                  isDragging ? 'bg-primary-500' : 'bg-gray-200'
+                }`}>
+                  <Upload className={`w-8 h-8 ${isDragging ? 'text-white' : 'text-gray-500'}`} />
                 </div>
-                <span className="text-xl font-semibold text-slate-700 mb-2">
+                <span className="text-base font-medium text-gray-700 mb-2">
                   {isDragging ? 'Solte o arquivo aqui' : 'Arraste e solte ou clique para selecionar'}
                 </span>
-                <span className="text-sm text-slate-500">
+                <span className="text-sm text-gray-500">
                   Suporta: JPG, PNG, PDF (máx. 10MB)
                 </span>
               </label>
@@ -290,11 +281,11 @@ function App() {
             {/* File Preview */}
             {file && (
               <div className="mt-6 animate-fadeIn">
-                <div className="bg-gradient-to-r from-primary-50 to-blue-50 rounded-xl p-6 border border-primary-200 shadow-md">
+                <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-4 flex-1">
                       {imagePreview ? (
-                        <div className="relative w-24 h-24 rounded-lg overflow-hidden shadow-md flex-shrink-0">
+                        <div className="relative w-20 h-20 rounded border border-gray-200 overflow-hidden flex-shrink-0">
                           <img
                             src={imagePreview}
                             alt="Preview"
@@ -302,26 +293,23 @@ function App() {
                           />
                         </div>
                       ) : (
-                        <div className="w-24 h-24 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center shadow-md flex-shrink-0">
+                        <div className="w-20 h-20 bg-gray-200 rounded border border-gray-300 flex items-center justify-center flex-shrink-0">
                           {getFileIcon() && (
-                            <div className="text-white">
+                            <div className="text-gray-500">
                               {getFileIcon()}
                             </div>
                           )}
                         </div>
                       )}
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          <FileText className="w-5 h-5 text-primary-600 flex-shrink-0" />
-                          <span className="font-semibold text-slate-800 truncate">
+                        <div className="flex items-center gap-2 mb-1">
+                          <FileText className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                          <span className="font-medium text-gray-900 truncate">
                             {file.name}
                           </span>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-slate-600">
-                          <span className="flex items-center gap-1">
-                            <File className="w-4 h-4" />
-                            {file.type === 'application/pdf' ? 'PDF' : file.type.split('/')[1].toUpperCase()}
-                          </span>
+                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                          <span>{file.type === 'application/pdf' ? 'PDF' : file.type.split('/')[1].toUpperCase()}</span>
                           <span>•</span>
                           <span>{formatFileSize(file.size)}</span>
                         </div>
@@ -329,7 +317,7 @@ function App() {
                     </div>
                     <button
                       onClick={handleReset}
-                      className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0"
+                      className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors flex-shrink-0"
                       title="Remover arquivo"
                     >
                       <X className="w-5 h-5" />
@@ -340,27 +328,22 @@ function App() {
             )}
 
             {/* Action Buttons */}
-            <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <button
                 onClick={handleUpload}
                 disabled={!file || loading}
-                className="flex-1 group relative overflow-hidden bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-primary-700 hover:to-primary-800 disabled:from-slate-300 disabled:to-slate-400 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] disabled:hover:scale-100"
+                className="flex-1 bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
               >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {loading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="w-5 h-5" />
-                      Fazer Upload
-                    </>
-                  )}
-                </span>
-                {!loading && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-700 to-primary-800 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></div>
+                {loading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-5 h-5" />
+                    Fazer Upload
+                  </>
                 )}
               </button>
 
@@ -368,23 +351,18 @@ function App() {
                 <button
                   onClick={handleProcess}
                   disabled={processing}
-                  className="flex-1 group relative overflow-hidden bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-800 disabled:from-slate-300 disabled:to-slate-400 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] disabled:hover:scale-100"
+                  className="flex-1 bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
                 >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    {processing ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Processando com IA...
-                      </>
-                    ) : (
-                      <>
-                        <Zap className="w-5 h-5" />
-                        Processar Arquivo
-                      </>
-                    )}
-                  </span>
-                  {!processing && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-purple-800 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></div>
+                  {processing ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Processando...
+                    </>
+                  ) : (
+                    <>
+                      <Zap className="w-5 h-5" />
+                      Processar Arquivo
+                    </>
                   )}
                 </button>
               )}
@@ -394,54 +372,50 @@ function App() {
           {/* Error Message */}
           {error && (
             <div className="mb-6 animate-fadeIn">
-              <div className="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 flex items-start gap-3">
+              <div className="bg-red-50 border-l-4 border-red-500 rounded p-4 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                <p className="text-red-800 font-medium">{error}</p>
+                <p className="text-red-800 text-sm">{error}</p>
               </div>
             </div>
           )}
 
           {/* Results Section */}
           {result && (
-            <div className="space-y-6 animate-fadeIn">
+            <div className="space-y-6 animate-fadeIn border-t border-gray-200 pt-6">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <CheckCircle2 className="w-5 h-5 text-green-600" />
-                </div>
-                <h2 className="text-3xl font-bold text-slate-800">
+                <CheckCircle2 className="w-5 h-5 text-green-600" />
+                <h2 className="text-xl font-semibold text-gray-900">
                   Resultados do Processamento
                 </h2>
               </div>
 
               {/* Text/OCR Result */}
               {result.text && (
-                <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-6 border border-slate-200 shadow-lg">
+                <div className="bg-gray-50 rounded-lg p-5 border border-gray-200">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-primary-100 rounded-lg">
-                        <FileText className="w-5 h-5 text-primary-600" />
-                      </div>
-                      <h3 className="text-xl font-bold text-slate-800">
+                      <FileText className="w-5 h-5 text-gray-600" />
+                      <h3 className="font-semibold text-gray-900">
                         Texto Extraído (OCR)
                       </h3>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                       <button
                         onClick={() => copyToClipboard(result.text || '')}
-                        className="p-2 text-slate-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
                         title="Copiar texto"
                       >
                         <Copy className="w-4 h-4" />
                       </button>
                       {result.word_count && (
-                        <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
+                        <span className="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm font-medium">
                           {result.word_count} palavras
                         </span>
                       )}
                     </div>
                   </div>
-                  <div className="bg-white rounded-xl p-5 max-h-96 overflow-y-auto shadow-inner border border-slate-200">
-                    <p className="text-slate-700 whitespace-pre-wrap leading-relaxed">
+                  <div className="bg-white rounded border border-gray-200 p-4 max-h-96 overflow-y-auto">
+                    <p className="text-gray-700 whitespace-pre-wrap leading-relaxed text-sm">
                       {result.text}
                     </p>
                   </div>
@@ -456,36 +430,32 @@ function App() {
 
               {/* Image Description */}
               {result.description && (
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-200 shadow-lg">
+                <div className="bg-gray-50 rounded-lg p-5 border border-gray-200">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-purple-100 rounded-lg">
-                      <Brain className="w-5 h-5 text-purple-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-800">
+                    <Brain className="w-5 h-5 text-gray-600" />
+                    <h3 className="font-semibold text-gray-900">
                       Descrição da Imagem (IA)
                     </h3>
                   </div>
-                  <div className="bg-white rounded-xl p-5 shadow-inner border border-purple-200">
-                    <p className="text-slate-700 leading-relaxed">{result.description}</p>
+                  <div className="bg-white rounded border border-gray-200 p-4">
+                    <p className="text-gray-700 leading-relaxed text-sm">{result.description}</p>
                   </div>
                 </div>
               )}
 
               {/* Audio Player */}
               {result.audio_url && (
-                <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-6 border border-emerald-200 shadow-lg">
+                <div className="bg-gray-50 rounded-lg p-5 border border-gray-200">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-emerald-100 rounded-lg">
-                      <Mic className="w-5 h-5 text-emerald-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-800">
+                    <Mic className="w-5 h-5 text-gray-600" />
+                    <h3 className="font-semibold text-gray-900">
                       Áudio Gerado
                     </h3>
                   </div>
-                  <div className="bg-white rounded-xl p-4 shadow-inner border border-emerald-200">
+                  <div className="bg-white rounded border border-gray-200 p-3">
                     <audio
                       controls
-                      className="w-full h-12"
+                      className="w-full h-10"
                       src={result.audio_url?.startsWith('http') 
                         ? result.audio_url 
                         : `http://localhost:8000${result.audio_url}`}
@@ -498,19 +468,19 @@ function App() {
 
               {/* Export Buttons */}
               {(result.text || result.description) && (
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
                   <button
                     onClick={() => handleExport('txt')}
-                    className="flex-1 group bg-gradient-to-r from-slate-700 to-slate-800 text-white px-6 py-4 rounded-xl font-semibold hover:from-slate-800 hover:to-slate-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center gap-2"
+                    className="flex-1 bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
                   >
-                    <Download className="w-5 h-5" />
+                    <Download className="w-4 h-4" />
                     Exportar como TXT
                   </button>
                   <button
                     onClick={() => handleExport('srt')}
-                    className="flex-1 group bg-gradient-to-r from-slate-700 to-slate-800 text-white px-6 py-4 rounded-xl font-semibold hover:from-slate-800 hover:to-slate-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center gap-2"
+                    className="flex-1 bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
                   >
-                    <Download className="w-5 h-5" />
+                    <Download className="w-4 h-4" />
                     Exportar como SRT
                   </button>
                 </div>
@@ -520,49 +490,46 @@ function App() {
         </div>
 
         {/* Features Section */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8 relative z-10">
-          <div className="group bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-8 border border-white/20 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
-              <FileText className="w-8 h-8 text-white" />
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <FileText className="w-6 h-6 text-primary-600" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-3">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
               OCR Inteligente
             </h3>
-            <p className="text-slate-600 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               Extraia texto de imagens e PDFs escaneados com alta precisão usando tecnologia de reconhecimento óptico de caracteres
             </p>
           </div>
-          <div className="group bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-8 border border-white/20 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-600 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
-              <Brain className="w-8 h-8 text-white" />
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <Brain className="w-6 h-6 text-primary-600" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-3">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
               IA Descritiva
             </h3>
-            <p className="text-slate-600 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               Gere descrições automáticas de imagens usando inteligência artificial avançada para tornar conteúdo visual acessível
             </p>
           </div>
-          <div className="group bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-8 border border-white/20 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
-              <Volume2 className="w-8 h-8 text-white" />
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              <Volume2 className="w-6 h-6 text-primary-600" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-3">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Texto para Voz
             </h3>
-            <p className="text-slate-600 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               Converta qualquer texto em áudio natural e claro, permitindo acesso auditivo ao conteúdo escrito
             </p>
           </div>
         </div>
 
         {/* Footer */}
-        <footer className="text-center text-slate-600 text-sm relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/50 backdrop-blur-sm rounded-full">
-            <Sparkles className="w-4 h-4 text-primary-600" />
-            <p className="font-medium">VoxAccess - Feira de Ciências 2024</p>
-          </div>
-          <p className="mt-3 text-slate-500">Acessibilidade e IA para Todos</p>
+        <footer className="text-center text-gray-500 text-sm">
+          <p className="font-medium">VoxAccess - Feira de Ciências 2024</p>
+          <p className="mt-1">Acessibilidade e IA para Todos</p>
         </footer>
       </div>
     </div>
