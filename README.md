@@ -47,12 +47,23 @@ brew install poppler
 brew install python3
 ```
 
-#### Linux (Ubuntu/Debian)
+#### Linux (Ubuntu/Debian/Mint)
 ```bash
-# Instalar Tesseract OCR
+# Instalar todas as dependências necessárias
 sudo apt-get update
-sudo apt-get install tesseract-ocr tesseract-ocr-por poppler-utils python3 python3-pip
+sudo apt-get install -y \
+    build-essential \
+    cmake \
+    pkg-config \
+    tesseract-ocr \
+    tesseract-ocr-por \
+    poppler-utils \
+    python3-dev \
+    python3-pip \
+    python3-venv
 ```
+
+**Importante**: No Linux, você precisa das ferramentas de compilação (build-essential, cmake) para instalar algumas dependências Python. Consulte `INSTALACAO_LINUX.md` para mais detalhes.
 
 #### Windows
 1. Baixe e instale [Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki)

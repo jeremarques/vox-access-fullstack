@@ -9,11 +9,24 @@
 brew install tesseract tesseract-lang poppler python3 node
 ```
 
-#### Linux (Ubuntu/Debian)
+#### Linux (Ubuntu/Debian/Mint)
 ```bash
 sudo apt-get update
-sudo apt-get install tesseract-ocr tesseract-ocr-por poppler-utils python3 python3-pip nodejs npm
+sudo apt-get install -y \
+    build-essential \
+    cmake \
+    pkg-config \
+    tesseract-ocr \
+    tesseract-ocr-por \
+    poppler-utils \
+    python3-dev \
+    python3-pip \
+    python3-venv \
+    nodejs \
+    npm
 ```
+
+**Nota**: Para Linux, consulte também `INSTALACAO_LINUX.md` para instruções detalhadas.
 
 #### Windows
 1. Instale [Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki)
