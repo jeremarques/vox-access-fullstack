@@ -20,6 +20,13 @@ export default {
           900: '#0c4a6e',
         },
       },
+      animation: {
+        'blob': 'blob 7s infinite',
+        'fadeIn': 'fadeIn 0.5s ease-out',
+      },
+      backdropBlur: {
+        xs: '2px',
+      },
     },
   },
   plugins: [],

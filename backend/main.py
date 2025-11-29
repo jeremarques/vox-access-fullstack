@@ -1,7 +1,8 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from typing import Optional
+from pydantic import BaseModel
 import os
 import uuid
 import aiofiles
@@ -34,6 +35,12 @@ ocr_service = OCRService()
 tts_service = TTSService()
 image_desc_service = ImageDescriptionService()
 pdf_service = PDFService()
+
+# Modelos Pydantic
+class ExportRequest(BaseModel):
+    file_id: str
+    format: str
+    content: str
 
 @app.get("/")
 async def root():
@@ -143,40 +150,42 @@ async def get_audio(file_id: str):
     return FileResponse(audio_path, media_type="audio/mpeg")
 
 @app.post("/api/export")
-async def export_content(
-    file_id: str,
-    format: str,
-    content: str
-):
+async def export_content(export_request: ExportRequest):
     """
     Exporta conteúdo em diferentes formatos
     format: 'txt', 'srt' (legendas)
     """
     try:
-        if format == 'txt':
+        file_id = export_request.file_id
+        format_type = export_request.format
+        content = export_request.content
+        
+        if format_type == 'txt':
             output_path = OUTPUT_DIR / f"{file_id}_export.txt"
             async with aiofiles.open(output_path, 'w', encoding='utf-8') as f:
                 await f.write(content)
             return FileResponse(
-                output_path,
-                media_type="text/plain",
-                filename=f"voxaccess_{file_id}.txt"
+                str(output_path),
+                media_type="text/plain; charset=utf-8",
+                filename=f"voxaccess_{file_id}.txt",
+                headers={"Content-Disposition": f'attachment; filename="voxaccess_{file_id}.txt"'}
             )
-        elif format == 'srt':
+        elif format_type == 'srt':
             # Converter para formato SRT simples
             output_path = OUTPUT_DIR / f"{file_id}_export.srt"
             srt_content = f"1\n00:00:00,000 --> 00:00:10,000\n{content}\n"
             async with aiofiles.open(output_path, 'w', encoding='utf-8') as f:
                 await f.write(srt_content)
             return FileResponse(
-                output_path,
-                media_type="text/plain",
-                filename=f"voxaccess_{file_id}.srt"
+                str(output_path),
+                media_type="text/plain; charset=utf-8",
+                filename=f"voxaccess_{file_id}.srt",
+                headers={"Content-Disposition": f'attachment; filename="voxaccess_{file_id}.srt"'}
             )
         else:
-            raise HTTPException(status_code=400, detail="Formato não suportado")
+            raise HTTPException(status_code=400, detail="Formato não suportado. Use 'txt' ou 'srt'")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Erro ao exportar: {str(e)}")
 
 @app.delete("/api/files/{file_id}")
 async def delete_file(file_id: str):
