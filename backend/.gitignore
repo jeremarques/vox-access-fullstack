@@ -25,6 +25,7 @@ uploads/
 outputs/
 *.mp3
 *.txt
+!requirements.txt
 *.srt
 .DS_Store
 .env
