@@ -5,9 +5,6 @@ import os
 class OCRService:
     def __init__(self):
         # Configurar caminho do Tesseract se necessário
-        # Para macOS: brew install tesseract
-        # Para Linux: sudo apt-get install tesseract-ocr
-        # Para Windows: baixar do GitHub e configurar PATH
         pass
     
     async def extract_text(self, image_path: str) -> str:
